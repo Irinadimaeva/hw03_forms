@@ -1,5 +1,5 @@
 # Из приложения django.contrib.auth нужный view-класс
-from django.contrib.auth.views import LoginView, LogoutView, PasswordResetView
+import django.contrib.auth.views as authViews
 from django.urls import path
 
 from . import views
@@ -15,18 +15,20 @@ urlpatterns = [
         # В описании обработчика укажем шаблон,
         # который должен применяться для отображения возвращаемой страницы.
         # Во view-классах так можно!
-        LogoutView.as_view(template_name='users/logged_out.html'),
+        authViews.LogoutView.as_view(template_name='users/logged_out.html'),
         name='logout'
     ),
     path(
         'login/',
-        LoginView.as_view(template_name='users/login.html'),
+        authViews.LoginView.as_view(template_name='users/login.html'),
         name='login'
     ),
 
-    path(
-        'password_reset/',
-        PasswordResetView.as_view(),
-        name='password_reset_form'
-    ),
+    path('password_change/', authViews.PasswordChangeView.as_view(), name='password_change'),
+    path('password_change/done/', authViews.PasswordChangeDoneView.as_view(), name='password_change_done'),
+
+    path('password_reset/', authViews.PasswordResetView.as_view(), name='password_reset'),
+    path('password_reset/done/', authViews.PasswordResetDoneView.as_view(), name='password_reset_done'),
+    path('reset/<uidb64>/<token>/', authViews.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+    path('reset/done/', authViews.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
 ]
