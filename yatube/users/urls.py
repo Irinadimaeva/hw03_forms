@@ -24,11 +24,35 @@ urlpatterns = [
         name='login'
     ),
 
-    path('password_change/', authViews.PasswordChangeView.as_view(), name='password_change'),
-    path('password_change/done/', authViews.PasswordChangeDoneView.as_view(), name='password_change_done'),
+    path(
+        'password_change/',
+        authViews.PasswordChangeView.as_view(),
+        name='password_change'
+    ),
+    path(
+        'password_change/done/',
+        authViews.PasswordChangeDoneView.as_view(),
+        name='password_change_done'
+    ),
 
-    path('password_reset/', authViews.PasswordResetView.as_view(), name='password_reset'),
-    path('password_reset/done/', authViews.PasswordResetDoneView.as_view(), name='password_reset_done'),
-    path('reset/<uidb64>/<token>/', authViews.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
-    path('reset/done/', authViews.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
+    path(
+        'password_reset/',
+        authViews.PasswordResetView.as_view(),
+        name='password_reset'
+    ),
+    path(
+        'password_reset/done/',
+        authViews.PasswordResetDoneView.as_view(),
+        name='password_reset_done'
+    ),
+    path(
+        'reset/<uidb64>/<token>/',
+        authViews.PasswordResetConfirmView.as_view(),
+        name='password_reset_confirm'
+    ),
+    path(
+        'reset/done/',
+        authViews.PasswordResetCompleteView.as_view(),
+        name='password_reset_complete'
+    ),
 ]
