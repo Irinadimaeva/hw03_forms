@@ -1,3 +1,43 @@
-# backend_community_homework
+# Социальная сеть YaTube Ирины Димаевой
 
-[![CI](https://github.com/yandex-praktikum/hw03_forms/actions/workflows/python-app.yml/badge.svg?branch=master)](https://github.com/yandex-praktikum/hw03_forms/actions/workflows/python-app.yml)
+## Описание проекта
+Данная программа - социальная сеть. Пользователи могут зарегистрироваться и писать посты. Посты после написания можно добавлять в тематические группы или не добавлять.
+
+## Используемые технологии
+* Python 3.8
+* Django 2.2.6
+
+## Инструкция по запуску
+
+Необходимо сначала склонировать репозиторий:
+
+```sh
+$ git clone https://github.com/Irinadimaeva/hw03_forms
+$ cd hw03_forms
+```
+
+Создайте виртуальное окружение и активируйте его:
+
+```sh
+$ python3 -m venv venv
+$ source venv/bin/activate
+```
+
+Затем установите зависимости:
+
+```sh
+(venv)$ pip install -r requirements.txt
+```
+Обратите внимание на `(venv)` в начале командной строки. Это говорит о том, что сессия терминала оперирует в виртуальном окружении, установленном модулем `venv`.
+
+После того как `pip` закончит загружать зависимости:
+```sh
+(venv)$ cd yatube
+(venv)$ python3 manage.py runserver
+```
+И перейдите по ссылке `http://127.0.0.1:8000/`.
+
+
+## Автор и разработчик
+Ирина Димаева `dimaeva2016@yandex.ru`
+
