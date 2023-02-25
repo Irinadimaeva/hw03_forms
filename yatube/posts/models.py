@@ -7,9 +7,7 @@ User = get_user_model()
 class Group(models.Model):
     title = models.CharField(verbose_name='Название', max_length=200)
     slug = models.SlugField(
-        verbose_name='URL группы',
-        max_length=200,
-        unique=True
+        verbose_name='URL группы', max_length=200, unique=True
     )
     description = models.TextField(verbose_name='Описание')
 
@@ -22,29 +20,22 @@ class Group(models.Model):
 
 
 class Post(models.Model):
+    DESCRIPTION_TEMPLATE = ('Автор: {author}; '
+                            'Пост: {text}; '
+                            'Дата: {pub_date}')
+
     text = models.TextField(
-        verbose_name='Текст поста',
-        help_text='Текст нового поста',
-    )
+        verbose_name='Текст поста', help_text='Текст нового поста', )
     pub_date = models.DateTimeField(
-        verbose_name='Дата публикации',
-        auto_now_add=True
+        verbose_name='Дата публикации', auto_now_add=True
     )
     author = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE,
-        related_name='posts',
-        verbose_name='Автор поста',
-    )
+        User, on_delete=models.CASCADE, related_name='posts',
+        verbose_name='Автор поста', )
     group = models.ForeignKey(
-        Group,
-        on_delete=models.SET_NULL,
-        related_name='posts',
-        blank=True,
-        null=True,
-        verbose_name='Группа',
-        help_text='Группа, к которой будет относиться пост',
-    )
+        Group, on_delete=models.SET_NULL, related_name='posts', blank=True,
+        null=True, verbose_name='Группа',
+        help_text='Группа, к которой будет относиться пост', )
 
     class Meta:
         ordering = ('-pub_date',)
@@ -53,4 +44,8 @@ class Post(models.Model):
 
     def __str__(self):
         # выводим текст поста
-        return self.text
+        return self.DESCRIPTION_TEMPLATE.format(
+            author=self.author.get_full_name(),
+            text=self.text[:50],
+            pub_date=self.pub_date.strftime('%d.%m.%Y')
+        )
