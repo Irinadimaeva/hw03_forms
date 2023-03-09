@@ -46,6 +46,6 @@ class Post(models.Model):
         # выводим текст поста
         return self.DESCRIPTION_TEMPLATE.format(
             author=self.author.get_full_name(),
-            text=self.text[:50],
+            text=self.text[:15],
             pub_date=self.pub_date.strftime('%d.%m.%Y')
         )
