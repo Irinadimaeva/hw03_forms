@@ -21,7 +21,7 @@ class PostsURLTests(TestCase):
             text='Тестовый текст',
         )
 
-    def setUp(self):
+    def setUp(self) -> None:
         # Создаем неавторизованный клиент
         self.guest_client = Client()
         # авторизированный
@@ -36,14 +36,14 @@ class PostsURLTests(TestCase):
         """ Тестирование страниц доступных любому пользователю."""
         context = [
             '/',
-            '/group/test-slug/',
+            f'/group/{self.group.slug}/',
             '/profile/auth/',
-            '/posts/1/',
+            f'/posts/{self.post.id}/',
         ]
         for address in context:
             with self.subTest(address=address):
                 response = self.guest_client.get(address)
-                self.assertEqual(response.status_code, 200,)
+                self.assertEqual(response.status_code, 200)
 
     def test_close_pages(self):
         """ Тестирование страниц доступных авторизованному пользователю."""
@@ -58,7 +58,7 @@ class PostsURLTests(TestCase):
     def test_author_pages(self):
         """Тестирование страниц доступных автору."""
         context = [
-            '/posts/1/edit/',
+            f'/posts/{self.post.id}/edit/',
         ]
         for address in context:
             with self.subTest(address=address):

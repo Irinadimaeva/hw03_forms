@@ -21,11 +21,17 @@ class PostModelTest(TestCase):
             text='Тестовый пост',
         )
 
-
-    def test_models_have_correct_object_names(self):
+    def test_group_model(self):
         """Проверяем, что у моделей корректно работает __str__."""
         group = PostModelTest.group
-        expected_object_name = group.title
-        self.assertEqual(expected_object_name, str(group))
+        self.assertEqual(group.title, str(group))
 
-
+    def test_post_model(self):
+        """Проверяем, что у моделей корректно работает __str__."""
+        post = PostModelTest.post
+        expected_object_name = post.DESCRIPTION_TEMPLATE.format(
+            author=post.author.get_full_name(),
+            text=post.text[:15],
+            pub_date=post.pub_date.strftime('%d.%m.%Y')
+        )
+        self.assertEqual(expected_object_name, str(post))
